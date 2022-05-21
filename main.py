@@ -1,9 +1,6 @@
 from pytube import YouTube as yt
 import os
 
-#Clear consol everytime the app runs
-os.system('cls')
-
 def YouTubeInfo(URL):
     while (True):
         os.system("cls")
@@ -13,8 +10,9 @@ def YouTubeInfo(URL):
         if ch=="1":
             print("Title: ",video.title) #prints the title of the video
         elif ch =="2":
+            
             myvideo = video.streams.get_audio_only()  #records the audio of the file
-            downloaded_file = myvideo.download()      #myvideo.download downloads a mp4 file
+            downloaded_file = myvideo.download('/Downloads')      #myvideo.download downloads a mp4 file
             base, ext = os.path.splitext(downloaded_file) #file separated in to base and extention
             new_file = base + '.mp3' #extension changed from mp4 to mp3
             os.rename(downloaded_file, new_file) #rename the main output file
@@ -32,7 +30,7 @@ def YouTubeInfo(URL):
             video = yt(url)
             YouTubeInfo()
         elif ch =="0":
-            os._exit(0)
+            return 0
         else :
             YouTubeInfo()
 
@@ -41,18 +39,24 @@ def YouTubeInfo(URL):
 
     
 def MAIN():
+
+    #Clear consol everytime the app runs
+    os.system('cls')
+    print("\tWelcome to PY_YT_Downloader\n\n")
     #input url
+
     url = input("Input URL: ")
     try:
         os.system("cls")
+        
         YouTubeInfo(url)
     except Exception:
         print("Something went wrong. Please check internet connection. Add \"https//\" in the URL.\n Please try again or press Q to exit")
         ch = input("...Press any key to continue...")
         if ch == "Q" or ch == "q":
+            return 0
+        else:
             os.system("cls")
             MAIN()
-        else:
-            os._exit(0)
 
 MAIN()
