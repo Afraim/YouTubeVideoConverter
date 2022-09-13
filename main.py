@@ -25,7 +25,7 @@ def YouTubeInfo(URL):
             myvideo = video.streams.get_highest_resolution()
             myvideo.download()
             print("Successful")
-        elif ch =="4":
+        elif ch =="5":
             url = input("Enter New URL: ")
             video = yt(url)
             YouTubeInfo()
